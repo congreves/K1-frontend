@@ -63,6 +63,27 @@ function App() {
             console.error(error);
           });
       };
+
+  // PUT - ex. ÄNDRA NAMNET I TODO 
+  
+
+
+  // PATCH- ex. SKICKAR BARA IN DET VI VILL ÄNDRA
+  const checkTodo = (todo) => {
+    const url = `http://localhost:4000/todos/${todo.id}`;
+    console.log(todo);
+    axios
+      .patch(url, {complete: !todo.complete })
+      .then(function (response) {
+        console.log(response.data);
+        getTodos();
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  };
+
+  
   
 
   useEffect(() => {
@@ -81,8 +102,11 @@ function App() {
                 deleteTodo(todo.id);
               }}
             >
-              Delete
+            ✘
             </button>
+            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" onClick={() => {
+                checkTodo(todo);
+              }}></input>
           </p>
         ))}
 
